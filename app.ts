@@ -4,8 +4,8 @@ const url = window.location.href
 
 const solver = new Solver(process.env.YOUR_API_KEY);
 
-async function solveCaptcha(url) {
-  const siteKey = await document.querySelector('[data-sitekey]').getAttribute('data-sitekey');
+async function solveCaptcha(url: string) {
+  const siteKey: string | null | undefined = document?.querySelector('[data-sitekey]')?.getAttribute('data-sitekey');
   console.log('starting a proccess...');
 
   try {
@@ -17,8 +17,8 @@ async function solveCaptcha(url) {
     console.log('trying to find elements...');
 
     const textArea = await document.getElementById("g-recaptcha-response")
-    const buttonB = document.querySelector('button[type="submit"]')
-    const buttonI = document.querySelector('input[type="submit"]')
+    const buttonB: HTMLButtonElement | null = document.querySelector('button[type="submit"]')
+    const buttonI: HTMLInputElement | null = document.querySelector('input[type="submit"]')
 
     if (siteKey && textArea) {
       console.log('elements found');
@@ -27,8 +27,8 @@ async function solveCaptcha(url) {
     }
 
     
-    textArea.style.display = ''
-    textArea.innerHTML = response.data
+    textArea!.style.display = ''
+    textArea!.innerHTML = response.data
     
     if (buttonB) {
       buttonB.click()
